@@ -6,11 +6,12 @@ class ResultsList extends React.Component {
     itemId: ""
   };
 
-  // capture
-  handleInput = event => {
+  getId = id => {
+    console.log("youre in get Data");
+    console.log("this is the clicked id:", id);
     this.setState(
       {
-        // update itemID that was clicked here
+        itemId: id
       },
       () => {
         console.log("this is the updated state:", this.state);
@@ -20,17 +21,22 @@ class ResultsList extends React.Component {
 
   render() {
     const results = this.props.data;
-    let portfiolio = results.map((portfolio, i) => (
+    let portfolio = results.map((portfolio, i) => (
       <ResultItem
-        id={portfolio.position[i].instrument.id}
+        getData={this.getId}
+        id={portfolio.id}
         name={portfolio.position[i].instrument.name}
+        instruments={portfolio.position.length - 1}
+        marketVal={portfolio.market_value}
+        currency={portfolio.currency}
         key={i}
       />
     ));
 
     return (
-      <div>
-        <ul className="portfolios">{portfiolio}</ul>
+      <div style={this.props.show ? {} : { display: "none" }}>
+        <h1 className="page-title"> My Portfolio List</h1>
+        <ul className="portfolios-ul">{portfolio}</ul>
       </div>
     );
   }

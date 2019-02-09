@@ -1,24 +1,21 @@
 import React from "react";
 
 class ResultItem extends React.Component {
-  // state = {
-  //   itemId: ""
-  // };
-
-  // capture
-  // handleInput = event => {
-  //   this.setState(
-  //     {
-  //       // update itemID that was clicked here
-  //     },
-  //     () => {
-  //       console.log("this is the updated state:", this.state);
-  //     }
-  //   );
-  // };
-
   render() {
-    return <li className="portfolios">{this.props.name}</li>;
+    return (
+      <li
+        className="portfolio-li"
+        onClick={ev => this.props.getData(ev.target.id)}
+      >
+        <p className="instrument-name" id={this.props.id}>
+          {this.props.name} and {this.props.instruments} others
+        </p>
+        <p className="market-value">
+          {this.props.marketVal === null ? 0 : this.props.marketVal}
+        </p>
+        <p>{this.props.currency}</p>
+      </li>
+    );
   }
 }
 

@@ -1,21 +1,14 @@
 import React from "react";
 import LoginForm from "./LoginForm";
 import ResultsList from "./ResultsList";
+import Header from "./Header";
 
 class App extends React.Component {
   state = {
-    token: "", // 4. empty to take on token once its returned
+    token: "",
     portfolios: [],
     authorised: false
   };
-
-  componentDidMount() {
-    // 3. fetch() POST login details ->  grabbed from component in Login
-    // 5. setState(token: [retured data])
-    // 6. refresh token...if token comes back
-    // if (token) {
-    // make a get request and
-  }
 
   login = (email, password) => {
     event.preventDefault();
@@ -38,7 +31,7 @@ class App extends React.Component {
           },
           () => {
             //save in local storage here
-            this.getData();
+            this.getPortfolioData();
             console.log("this is the state after login:", this.state);
           }
         );
@@ -46,7 +39,7 @@ class App extends React.Component {
     // .catch(don't forget to catch errors)
   };
 
-  getData = () => {
+  getPortfolioData = () => {
     fetch("https://beta.stockzoom.com/api/v1/me/portfolios/", {
       method: "GET",
       headers: {
@@ -69,9 +62,13 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <LoginForm credentials={this.login} />
-        <ResultsList data={this.state.portfolios} />
+      <div className="container">
+        <Header />
+        <LoginForm credentials={this.login} hide={this.state.authorised} />
+        <ResultsList
+          data={this.state.portfolios}
+          show={this.state.authorised}
+        />
       </div>
     );
   }

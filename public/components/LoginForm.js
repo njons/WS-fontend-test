@@ -20,7 +20,10 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div
+        className="container"
+        style={this.props.hide ? { display: "none" } : {}}
+      >
         <form
           onSubmit={ev =>
             this.props.credentials(this.state.email, this.state.password)
@@ -34,7 +37,7 @@ class LoginForm extends React.Component {
             Password
             <input type="text" name="password" onChange={this.handleInput} />
           </label>
-          <button type="submit"> Submit </button>
+          <button type="submit"> Login </button>
         </form>
       </div>
     );
