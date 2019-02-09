@@ -1,9 +1,12 @@
 import React from "react";
 import LoginForm from "./LoginForm";
+import ResultsList from "./ResultsList";
 
 class App extends React.Component {
   state = {
-    token: [] // 4. empty to take on token once its returned
+    token: "", // 4. empty to take on token once its returned
+    portfolios: [],
+    authorised: false
   };
 
   componentDidMount() {
@@ -25,23 +28,50 @@ class App extends React.Component {
         password
       })
     })
+      // .then(checkStatus ==> separete function that looks at the status code of the res object to ensure its 200)
       .then(res => res.json())
-      .then(token =>
+      .then(token => {
         this.setState(
           {
-            token: token
+            token: token.token,
+            authorised: true
+          },
+          () => {
+            //save in local storage here
+            this.getData();
+            console.log("this is the state after login:", this.state);
+          }
+        );
+      });
+    // .catch(don't forget to catch errors)
+  };
+
+  getData = () => {
+    fetch("https://beta.stockzoom.com/api/v1/me/portfolios/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.state.token}`
+      }
+    })
+      .then(res => res.json())
+      .then(portfolios => {
+        this.setState(
+          {
+            portfolios: portfolios.results
           },
           () => {
             console.log("this is the state after login:", this.state);
           }
-        )
-      );
+        );
+      });
   };
 
   render() {
     return (
       <div>
         <LoginForm credentials={this.login} />
+        <ResultsList data={this.state.portfolios} />
       </div>
     );
   }

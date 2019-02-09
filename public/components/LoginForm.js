@@ -1,16 +1,9 @@
 import React from "react";
-import Email from "./Email";
-import Input from "./Input";
 
 class LoginForm extends React.Component {
   state = {
     email: "",
     password: ""
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    console.log("you clicked submit");
   };
 
   // capture
