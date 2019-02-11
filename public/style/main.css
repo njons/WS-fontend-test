@@ -24,7 +24,7 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 20px;
   min-width: 60vw;
 }
 
@@ -60,7 +60,8 @@ button {
 .banner {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
+  padding: 0 6px;
 }
 
 .back,
@@ -72,6 +73,7 @@ button {
   text-transform: uppercase;
   padding: 4px;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
 .info {
@@ -83,6 +85,7 @@ button {
 
 ul {
   border-top: solid 2px beige;
+  margin: 20px 0;
 }
 
 li {
