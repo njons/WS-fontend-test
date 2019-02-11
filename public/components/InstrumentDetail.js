@@ -50,7 +50,6 @@ class InstrumentDetail extends React.Component {
           </div>
         </div>
       </div>
-      /* put code here */
     );
   }
 }

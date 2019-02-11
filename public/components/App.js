@@ -128,15 +128,15 @@ class App extends React.Component {
 
   backPortfolioDetail = () => {
     this.setState({
-      showPortfolioList: true,
-      showPortfolioDetail: false
+      showPortfolioDetail: true,
+      instrumentDetails: false
     });
   };
 
   backPortfolioList = () => {
     this.setState({
       showPortfolioList: true,
-      instrumentDetails: false
+      showPortfolioDetail: false
     });
   };
 
@@ -164,14 +164,14 @@ class App extends React.Component {
         <PortfolioDetail
           show={this.state.showPortfolioDetail}
           portfolioDetailsData={this.state.portfolioDetailsData}
-          back={this.backPortfolioDetail}
+          back={this.backPortfolioList}
           getInstrId={this.getInstrumentDetails}
           logout={this.logout}
         />
         <InstrumentDetail
           show={this.state.instrumentDetails}
           instrumentDetails={this.state.instrumentDetailsData}
-          back={this.backPortfolioList}
+          back={this.backPortfolioDetail}
           logout={this.logout}
         />
       </div>
