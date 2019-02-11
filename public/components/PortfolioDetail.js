@@ -29,7 +29,7 @@ class PortfolioDetail extends React.Component {
           <div className="control-buttons">
             <button className="back" onClick={this.props.back}>
               {" "}
-              {"back"}
+              {"◂ back"}
             </button>
             <LogoutButton logout={this.props.logout} />
           </div>

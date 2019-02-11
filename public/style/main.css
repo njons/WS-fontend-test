@@ -55,6 +55,12 @@ label {
   margin: 20px 0;
 }
 
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 label,
 input,
 button {
@@ -73,12 +79,6 @@ button {
   border: none;
 }
 
-.banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
 .paragraph {
   line-height: 33px;
 }
@@ -90,19 +90,17 @@ button {
   font-size: 14px;
   text-transform: uppercase;
   cursor: pointer;
-  padding: 4px;
-  margin: 0 3px;
+  padding: 4px 8px;
+  margin: 0 6px;
   border-radius: 5px;
-}
-
-.back {
-  background-color: beige;
+  border: 2px solid beige;
   color: midnightblue;
+  background-color: white;
 }
 
-.logout {
-  background-color: midnightblue;
-  color: white;
+.back:hover,
+.logout:hover {
+  background-color: beige;
 }
 
 .center {
@@ -144,10 +142,12 @@ li:hover,
 
 table {
   width: 100%;
+  margin-bottom: 33px;
 }
 
 thead {
-  background-color: beige;
+  border-bottom: 2px solid beige;
+  line-height: 33px;
 }
 
 .row {
@@ -158,5 +158,4 @@ thead {
   cursor: pointer;
   line-height: 33px;
   cursor: pointer;
-  /* border-bottom: 1px solid #ddd; */
 }

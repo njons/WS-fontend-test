@@ -20,7 +20,7 @@ class InstrumentDetail extends React.Component {
           <div className="control-buttons">
             <button className="back" onClick={this.props.back}>
               {" "}
-              {"back"}
+              {"◂ back"}
             </button>
             <LogoutButton logout={this.props.logout} />
           </div>
@@ -30,19 +30,21 @@ class InstrumentDetail extends React.Component {
             {instrumentDetail.company.description}
           </p>
           <div className="content">
-            <table className="table-">
+            <table className="table">
               <thead>
                 <tr className="row">
                   <td className="title">Symbol</td>
-                  <td className="title">Country</td>
                   <td className="title">Kind</td>
+                  <td className="title">Country</td>
+                  <td className="title">Rating</td>
                 </tr>
               </thead>
               <tbody>
                 <tr className="row">
                   <td className="text">{instrumentDetail.symbol}</td>
-                  <td className="text">{instrumentDetail.country}</td>
                   <td className="text">{instrumentDetail.kind}</td>
+                  <td className="text">{instrumentDetail.country}</td>
+                  <td className="text">{instrumentDetail.rating}</td>
                 </tr>
               </tbody>
             </table>
