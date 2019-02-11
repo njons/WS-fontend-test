@@ -124,7 +124,8 @@ li {
   align-items: center;
 }
 
-li:hover {
+li:hover,
+.table-row:hover {
   background-color: beige;
   color: black;
   cursor: pointer;
@@ -141,19 +142,21 @@ li:hover {
   border-radius: 5px;
 }
 
-.instruments-table {
+table {
   width: 100%;
+}
+
+thead {
+  background-color: beige;
+}
+
+.row {
+  border-bottom: solid 2px beige;
 }
 
 .table-row {
   cursor: pointer;
   line-height: 33px;
-  border-bottom: solid 2px beige;
   cursor: pointer;
   /* border-bottom: 1px solid #ddd; */
-}
-
-.table-row:hover {
-  background-color: beige;
-  color: black;
 }

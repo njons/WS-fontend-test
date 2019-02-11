@@ -51,7 +51,7 @@ class PortfolioDetail extends React.Component {
             <table className="instruments-table">
               <thead>
                 <tr>
-                  <td className="title">instrument</td>
+                  <td className="title">Instrument</td>
                   <td className="title">Price Today</td>
                   <td className="title">Allocation </td>
                   <td className="title">Change</td>

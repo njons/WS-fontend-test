@@ -6,7 +6,7 @@ class PortfolioDetailGrid extends React.Component {
     const instrumentDetails = this.props.instruments;
     return (
       <tr
-        className="table-row"
+        className="table-row row"
         onClick={ev => this.props.getInstrId(this.props.id)}
       >
         <td className="text">{instrumentDetails.instrument.name}</td>
