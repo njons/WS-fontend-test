@@ -9,7 +9,10 @@ class InstrumentDetail extends React.Component {
     const instrumentDetail = this.props.instrumentDetails;
     console.log("this is instrument details :", instrumentDetail);
     return (
-      <div style={this.props.show ? {} : { display: "none" }}>
+      <div
+        className="container"
+        style={this.props.show ? {} : { display: "none" }}
+      >
         <div className="banner">
           <h1 className="page-title">
             {" "}
@@ -20,10 +23,15 @@ class InstrumentDetail extends React.Component {
             {"< back"}
           </button>
         </div>
+        <h2>Details</h2>
+        <p className="info">{instrumentDetail.company.description}</p>
+
         <table className="instruments-table">
           <thead>
             <tr>
-              <td className="page-title">Name</td>
+              <td className="page-title">
+                Yield in {instrumentDetail.currency}
+              </td>
               <td className="page-title">Price Today</td>
               <td className="page-title">Allocation </td>
               <td className="page-title">Change</td>
@@ -31,7 +39,6 @@ class InstrumentDetail extends React.Component {
           </thead>
           <tbody>
             <tr className="instrument-row">
-              <td>{instrumentDetail.company.description}</td>
               <td>
                 {instrumentDetail.kind} {instrumentDetail.domestic_currency}
               </td>
