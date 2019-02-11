@@ -1,5 +1,6 @@
 import React from "react";
 import PortfolioDetailGrid from "./PortfolioDetailGrid";
+import LogoutButton from "./LogoutButton";
 
 class PortfolioDetail extends React.Component {
   render() {
@@ -29,6 +30,7 @@ class PortfolioDetail extends React.Component {
             {" "}
             {"< back"}
           </button>
+          <LogoutButton logout={this.props.logout} />
         </div>
         <h2 className="page-title">available cash</h2>
         <p className="portfolio-li">

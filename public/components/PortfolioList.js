@@ -1,6 +1,7 @@
 import React from "react";
 import PortfolioItem from "./PortfolioItem";
 import PortfolioDetail from "./PortfolioDetail";
+import LogoutButton from "./LogoutButton";
 
 class PortfolioList extends React.Component {
   render() {
@@ -9,7 +10,6 @@ class PortfolioList extends React.Component {
     }
 
     const results = this.props.portfolioListData;
-    console.log("these are the portfolio results:", results);
     let portfolio = results.map((portfolio, i) => (
       <PortfolioItem
         id={portfolio.id}
@@ -17,6 +17,7 @@ class PortfolioList extends React.Component {
         getPortfolioId={this.props.getPortfolioId}
         currency={portfolio.currency}
         key={i}
+        logout={this.logout}
       />
     ));
 
@@ -24,6 +25,7 @@ class PortfolioList extends React.Component {
       <div className="container">
         <div className="banner">
           <h1 className="page-title"> My Portfolio List</h1>
+          <LogoutButton logout={this.props.logout} />
         </div>
         <ul className="portfolios-ul">{portfolio}</ul>
       </div>

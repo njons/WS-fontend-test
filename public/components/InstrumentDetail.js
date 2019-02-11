@@ -1,5 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
+import LogoutButton from "./LogoutButton";
 
 class InstrumentDetail extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class InstrumentDetail extends React.Component {
             {" "}
             {"< back"}
           </button>
+          <LogoutButton logout={this.props.logout} />
         </div>
         <h2>Details</h2>
         <p className="info">{instrumentDetail.company.description}</p>

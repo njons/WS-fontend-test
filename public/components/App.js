@@ -19,6 +19,7 @@ class App extends React.Component {
 
   componentDidMount() {
     if (localStorage.getItem("token") !== null) {
+      console.log("this is in localstorage", localStorage.getItem("token"));
       this.setState(
         {
           showLoginForm: false,
@@ -139,6 +140,16 @@ class App extends React.Component {
     });
   };
 
+  logout = () => {
+    localStorage.removeItem("token");
+    this.setState({
+      showLoginForm: true,
+      showPortfolioList: false,
+      showPortfolioDetail: false,
+      instrumentDetails: false
+    });
+  };
+
   render() {
     return (
       <div className="container">
@@ -148,17 +159,20 @@ class App extends React.Component {
           portfolioListData={this.state.portfolioListData}
           getPortfolioId={this.getPortfolioDetails}
           show={this.state.showPortfolioList}
+          logout={this.logout}
         />
         <PortfolioDetail
           show={this.state.showPortfolioDetail}
           portfolioDetailsData={this.state.portfolioDetailsData}
           back={this.backPortfolioDetail}
           getInstrId={this.getInstrumentDetails}
+          logout={this.logout}
         />
         <InstrumentDetail
           show={this.state.instrumentDetails}
           instrumentDetails={this.state.instrumentDetailsData}
           back={this.backPortfolioList}
+          logout={this.logout}
         />
       </div>
     );
