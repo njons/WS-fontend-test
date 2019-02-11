@@ -18,10 +18,17 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    // if (localStorage.getItem("token") !== "null") {
-    //   console.log(localStorage.getItem("token") !== "null");
-    //   this.getPortfolioData();
-    // }
+    if (localStorage.getItem("token") !== null) {
+      this.setState(
+        {
+          showLoginForm: false,
+          showPortfolioList: true
+        },
+        () => {
+          this.getPortfolioData();
+        }
+      );
+    }
   }
 
   login = (email, password) => {
