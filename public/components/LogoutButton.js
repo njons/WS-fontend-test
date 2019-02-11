@@ -4,8 +4,8 @@ import { render } from "react-dom";
 class LogoutButton extends React.Component {
   render() {
     return (
-      <button className="header" onClick={ev => this.props.logout()}>
-        Logout
+      <button className="logout" onClick={ev => this.props.logout()}>
+        logout
       </button>
     );
   }

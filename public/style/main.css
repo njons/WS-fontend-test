@@ -63,7 +63,8 @@ button {
   align-items: center;
 }
 
-.back {
+.back,
+.logout {
   background-color: beige;
   color: midnightblue;
   font-weight: 700;
