@@ -13,39 +13,42 @@ class InstrumentDetail extends React.Component {
     return (
       <div className="container">
         <div className="banner">
-          <h1 className="page-title">
+          <h1 className="title">
             {" "}
             Details of {instrumentDetail.name} (#{instrumentDetail.id})
           </h1>
-          <button className="back" onClick={this.props.back}>
-            {" "}
-            {"< back"}
-          </button>
-          <LogoutButton logout={this.props.logout} />
+          <div className="control-buttons">
+            <button className="back" onClick={this.props.back}>
+              {" "}
+              {"back"}
+            </button>
+            <LogoutButton logout={this.props.logout} />
+          </div>
         </div>
-        <h2>Details</h2>
-        <p className="info">{instrumentDetail.company.description}</p>
-
-        <table className="instruments-table">
-          <thead>
-            <tr>
-              <td className="page-title">
-                Yield in {instrumentDetail.currency}
-              </td>
-              <td className="page-title">Price Today</td>
-              <td className="page-title">Allocation </td>
-              <td className="page-title">Change</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="instrument-row">
-              <td>
-                {instrumentDetail.kind} {instrumentDetail.domestic_currency}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div />
+        <div className="content">
+          <h2 className="header title">Details</h2>
+          <p className="text">{instrumentDetail.company.description}</p>
+          <div className="content">
+            <table className="instruments-table">
+              <thead>
+                <tr>
+                  <td className="title">
+                    Yield in {instrumentDetail.currency}
+                  </td>
+                  <td className="title">Price Today</td>
+                  <td className="title">Allocation </td>
+                  <td className="title">Change</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="instrument-row">
+                  <td className="text">{instrumentDetail.kind}</td>
+                  <td className="text">{instrumentDetail.domestic_currency}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       /* put code here */
     );

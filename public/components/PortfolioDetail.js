@@ -25,37 +25,41 @@ class PortfolioDetail extends React.Component {
     return (
       <div className="container">
         <div className="banner">
-          <h1 className="page-title"> Portfolio #{portfolioDetailsData.id}</h1>
-          <button className="back" onClick={this.props.back}>
-            {" "}
-            {"< back"}
-          </button>
-          <LogoutButton logout={this.props.logout} />
+          <h1 className="title"> Portfolio #{portfolioDetailsData.id}</h1>
+          <div className="control-buttons">
+            <button className="back" onClick={this.props.back}>
+              {" "}
+              {"back"}
+            </button>
+            <LogoutButton logout={this.props.logout} />
+          </div>
         </div>
-        <h2 className="page-title">available cash</h2>
-        <p className="portfolio-li">
-          {portfolioDetailsData.available_cash} {portfolioDetailsData.currency}
-        </p>
-        <h2 className="page-title">Market value</h2>
-        <p className="portfolio-li">
-          {portfolioDetailsData.market_value === null
-            ? 0
-            : portfolioDetailsData.market_value}{" "}
-          {portfolioDetailsData.currency}
-        </p>
-        <div className="grid-container">
-          <h2 className="page-title">Instruments</h2>
-          <table className="instruments-table">
-            <thead>
-              <tr>
-                <td className="page-title">Name</td>
-                <td className="page-title">Price Today</td>
-                <td className="page-title">Allocation </td>
-                <td className="page-title">Change</td>
-              </tr>
-            </thead>
-            <tbody>{instrument}</tbody>
-          </table>
+        <div className="content">
+          <h2 className="title">available cash</h2>
+          <p className="text">
+            {portfolioDetailsData.available_cash}{" "}
+            {portfolioDetailsData.currency}
+          </p>
+          <h2 className="title">Market value</h2>
+          <p className="text">
+            {portfolioDetailsData.market_value === null
+              ? 0
+              : portfolioDetailsData.market_value}{" "}
+            {portfolioDetailsData.currency}
+          </p>
+          <div className="content">
+            <table className="instruments-table">
+              <thead>
+                <tr>
+                  <td className="title">instrument</td>
+                  <td className="title">Price Today</td>
+                  <td className="title">Allocation </td>
+                  <td className="title">Change</td>
+                </tr>
+              </thead>
+              <tbody className=" top-table">{instrument}</tbody>
+            </table>
+          </div>
         </div>
       </div>
     );

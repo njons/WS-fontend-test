@@ -11,25 +11,19 @@ body {
   height: 100vh;
   font-size: 14px;
   letter-spacing: 1px;
-  text-transform: uppercase;
   display: flex;
   justify-content: center;
 }
 
-#root {
-  /* padding: 30px;
-  min-width: 60vw; */
+header {
+  margin: 0 auto;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  min-width: 60vw;
-}
-
-header {
-  margin: 0 auto;
+  width: 70vw;
 }
 
 form,
@@ -38,7 +32,29 @@ label {
   flex-direction: column;
 }
 
-.page-title,
+.title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 27px;
+  font-weight: 400;
+  padding: 6px;
+  border-bottom-width: 2px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.content {
+  margin: 20px 0;
+}
+
 label,
 input,
 button {
@@ -61,49 +77,50 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 0 6px;
 }
 
 .back,
 .logout {
-  background-color: beige;
-  color: midnightblue;
+  letter-spacing: 1px;
   font-weight: 700;
   font-size: 14px;
   text-transform: uppercase;
-  padding: 4px;
   cursor: pointer;
-  letter-spacing: 1px;
+  padding: 4px;
+  margin: 0 3px;
+  border-radius: 5px;
 }
 
-.info {
-  font-weight: 400;
-  font-size: 27px;
-  padding: 4px;
-  text-transform: lowercase;
+.back {
+  background-color: beige;
+  color: midnightblue;
+}
+
+.logout {
+  background-color: midnightblue;
+  color: white;
+}
+
+.center {
+  text-align: center;
+}
+
+.top-table {
+  border-top: solid 2px beige;
 }
 
 ul {
   border-top: solid 2px beige;
-  margin: 20px 0;
 }
 
 li {
   border-bottom: solid 2px beige;
-}
-
-.portfolio-li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 400;
-  font-size: 27px;
-  padding: 6px;
-  text-transform: lowercase;
-  /* border-bottom: midnightblue 2px solid; */
 }
 
-li.portfolio-li:hover {
+li:hover {
   background-color: beige;
   color: black;
   cursor: pointer;
@@ -124,13 +141,15 @@ li.portfolio-li:hover {
   width: 100%;
 }
 
-.instrument-row {
+.table-row {
   cursor: pointer;
   line-height: 33px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: solid 2px beige;
+  cursor: pointer;
+  /* border-bottom: 1px solid #ddd; */
 }
 
-.instrument {
-  background-color: yellow;
-  cursor: pointer;
+.table-row:hover {
+  background-color: beige;
+  color: black;
 }

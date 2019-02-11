@@ -24,7 +24,7 @@ class PortfolioList extends React.Component {
     return (
       <div className="container">
         <div className="banner">
-          <h1 className="page-title"> My Portfolios</h1>
+          <h1 className="title"> My Portfolios</h1>
           <LogoutButton logout={this.props.logout} />
         </div>
         <ul className="content">{portfolio}</ul>

@@ -9,10 +9,10 @@ class PortfolioItem extends React.Component {
         id={this.props.id}
         onClick={ev => this.props.getPortfolioId(ev.target.id)}
       >
-        <p className="instrument-name" id={this.props.id}>
+        <p className="text" id={this.props.id}>
           {this.props.cash} {this.props.currency} portfolio
         </p>
-        <p className="portfolio-identifier" id={this.props.id}>
+        <p className="text" id={this.props.id}>
           # {this.props.id}
         </p>
       </li>

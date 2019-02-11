@@ -6,16 +6,16 @@ class PortfolioDetailGrid extends React.Component {
     const instrumentDetails = this.props.instruments;
     return (
       <tr
-        className="instrument-row"
+        className="table-row"
         onClick={ev => this.props.getInstrId(this.props.id)}
       >
-        <td>{instrumentDetails.instrument.name}</td>
-        <td>
+        <td className="text">{instrumentDetails.instrument.name}</td>
+        <td className="text">
           {instrumentDetails.instrument.price_today}{" "}
           {instrumentDetails.domestic_currency}
         </td>
-        <td>{instrumentDetails.allocation} %</td>
-        <td>{instrumentDetails.change} </td>
+        <td className="center text">{instrumentDetails.allocation}%</td>
+        <td className="center text">{instrumentDetails.change} </td>
       </tr>
     );
   }

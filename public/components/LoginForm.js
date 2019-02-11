@@ -24,13 +24,23 @@ class LoginForm extends React.Component {
             this.props.credentials(this.state.email, this.state.password)
           }
         >
-          <label>
+          <label className="title">
             Email
-            <input type="text" name="email" onChange={this.handleInput} />
+            <input
+              type="text"
+              name="email"
+              onChange={this.handleInput}
+              required
+            />
           </label>
-          <label>
+          <label className="title">
             Password
-            <input type="text" name="password" onChange={this.handleInput} />
+            <input
+              type="text"
+              name="password"
+              onChange={this.handleInput}
+              required
+            />
           </label>
           <button className="submit" type="submit">
             {" "}
