@@ -17,13 +17,15 @@ body {
 }
 
 #root {
-  padding: 30px;
-  min-width: 60vw;
+  /* padding: 30px;
+  min-width: 60vw; */
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  padding: 30px;
+  min-width: 60vw;
 }
 
 header {
@@ -34,10 +36,13 @@ form,
 label {
   display: flex;
   flex-direction: column;
-  margin: 2px 0;
 }
 
-.page-title {
+.page-title,
+label,
+input,
+button {
+  margin: 2px 0;
 }
 
 input,
@@ -46,14 +51,61 @@ button {
   font-family: "Montserrat", sans-serif;
   font-size: 27px;
   font-weight: 400;
-  margin: 2px 0;
   padding: 0 4px;
   color: midnightblue;
   outline: none;
   border: none;
 }
 
-button {
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back {
+  background-color: beige;
+  color: midnightblue;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.info {
+  font-weight: 400;
+  font-size: 27px;
+  padding: 4px;
+  text-transform: lowercase;
+}
+
+ul {
+  border-top: solid 2px beige;
+}
+
+li {
+  border-bottom: solid 2px beige;
+}
+
+.portfolio-li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 400;
+  font-size: 27px;
+  padding: 6px;
+  text-transform: lowercase;
+  /* border-bottom: midnightblue 2px solid; */
+}
+
+li.portfolio-li:hover {
+  background-color: beige;
+  color: black;
+  cursor: pointer;
+}
+
+.submit {
   margin: 5% 0;
   background-color: midnightblue;
   color: white;
@@ -62,4 +114,19 @@ button {
   font-weight: 700;
   padding: 10px;
   border-radius: 5px;
+}
+
+.instruments-table {
+  width: 100%;
+}
+
+.instrument-row {
+  cursor: pointer;
+  line-height: 33px;
+  border-bottom: 1px solid #ddd;
+}
+
+.instrument {
+  background-color: yellow;
+  cursor: pointer;
 }
