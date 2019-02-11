@@ -79,6 +79,10 @@ button {
   align-items: baseline;
 }
 
+.paragraph {
+  line-height: 33px;
+}
+
 .back,
 .logout {
   letter-spacing: 1px;

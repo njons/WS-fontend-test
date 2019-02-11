@@ -26,8 +26,9 @@ class InstrumentDetail extends React.Component {
           </div>
         </div>
         <div className="content">
-          <h2 className="header title">Details</h2>
-          <p className="text">{instrumentDetail.company.description}</p>
+          <p className="paragraph text">
+            {instrumentDetail.company.description}
+          </p>
           <div className="content">
             <table className="instruments-table">
               <thead>
