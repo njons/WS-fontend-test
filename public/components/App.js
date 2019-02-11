@@ -19,7 +19,6 @@ class App extends React.Component {
 
   login = (email, password) => {
     event.preventDefault();
-    console.log("this is login");
     fetch("https://beta.stockzoom.com/api-token-auth/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -39,8 +38,8 @@ class App extends React.Component {
           },
           () => {
             //save in local storage here
+            localStorage.setItem("token", JSON.stringify(token.token));
             this.getPortfolioData();
-            console.log("this is the state after login:", this.state);
           }
         );
       });
@@ -48,11 +47,12 @@ class App extends React.Component {
   };
 
   getPortfolioData = () => {
+    const credentials = JSON.parse(localStorage.getItem("token"));
     fetch("https://beta.stockzoom.com/api/v1/me/portfolios/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.state.token}`
+        Authorization: `Bearer ${credentials}`
       }
     })
       .then(res => res.json())
@@ -70,57 +70,41 @@ class App extends React.Component {
   };
 
   getPortfolioDetails = id => {
+    const credentials = JSON.parse(localStorage.getItem("token"));
     fetch(`https://beta.stockzoom.com/api/v1/me/portfolios/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.state.token}`
+        Authorization: `Bearer ${credentials}`
       }
     })
       .then(res => res.json())
       .then(portfolioDetails => {
-        console.log("this is the data:", portfolioDetails);
-        this.setState(
-          {
-            resultList: false,
-            resultDetails: true,
-            portfolioDetails
-          },
-          () => {
-            console.log(
-              "this is the state after getting porfolio details:",
-              this.state
-            );
-          }
-        );
+        this.setState({
+          resultList: false,
+          resultDetails: true,
+          portfolioDetails
+        });
       });
   };
 
   getInstrumentDetails = id => {
+    const credentials = JSON.parse(localStorage.getItem("token"));
     fetch(`https://beta.stockzoom.com/api/v1/instruments/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.state.token}`
+        Authorization: `Bearer ${credentials}`
       }
     })
       .then(res => res.json())
       .then(instrumentDetails => {
-        console.log("this is the data:", instrumentDetails);
-        this.setState(
-          {
-            resultList: false,
-            resultDetails: false,
-            instrumentDetails: true,
-            instrumentDetailsData: instrumentDetails
-          },
-          () => {
-            console.log(
-              "this is the state after getting porfolio details:",
-              this.state
-            );
-          }
-        );
+        this.setState({
+          resultList: false,
+          resultDetails: false,
+          instrumentDetails: true,
+          instrumentDetailsData: instrumentDetails
+        });
       });
   };
 

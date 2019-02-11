@@ -6,16 +6,10 @@ class LoginForm extends React.Component {
     password: ""
   };
 
-  // capture
   handleInput = event => {
-    this.setState(
-      {
-        [event.target.name]: event.target.value
-      },
-      () => {
-        console.log("this is the updated state:", this.state);
-      }
-    );
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   render() {
