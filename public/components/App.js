@@ -7,15 +7,22 @@ import InstrumentDetail from "./InstrumentDetail";
 
 class App extends React.Component {
   state = {
-    loginForm: true,
-    resultList: false,
-    resultDetails: false,
+    showLoginForm: true,
+    showPortfolioList: false,
+    showPortfolioDetail: false,
     instrumentDetails: false,
     token: "",
-    portfolioList: [],
-    portfolioDetails: [],
+    portfolioListData: [],
+    portfolioDetailsData: [],
     instrumentDetailsData: []
   };
+
+  componentDidMount() {
+    // if (localStorage.getItem("token") !== "null") {
+    //   console.log(localStorage.getItem("token") !== "null");
+    //   this.getPortfolioData();
+    // }
+  }
 
   login = (email, password) => {
     event.preventDefault();
@@ -32,9 +39,9 @@ class App extends React.Component {
       .then(token => {
         this.setState(
           {
-            loginForm: false,
+            showLoginForm: false,
             token: token.token,
-            resultList: true
+            showPortfolioList: true
           },
           () => {
             //save in local storage here
@@ -48,6 +55,7 @@ class App extends React.Component {
 
   getPortfolioData = () => {
     const credentials = JSON.parse(localStorage.getItem("token"));
+    console.log("I am getting data since local storage has a token");
     fetch("https://beta.stockzoom.com/api/v1/me/portfolios/", {
       method: "GET",
       headers: {
@@ -60,7 +68,9 @@ class App extends React.Component {
         console.log("this is the data:", portfolios.results);
         this.setState(
           {
-            portfolioList: portfolios.results
+            portfolioListData: portfolios.results,
+            showLoginForm: false,
+            showPortfolioList: true
           },
           () => {
             console.log("this is the state after login:", this.state);
@@ -79,11 +89,11 @@ class App extends React.Component {
       }
     })
       .then(res => res.json())
-      .then(portfolioDetails => {
+      .then(portfolioDetailsData => {
         this.setState({
-          resultList: false,
-          resultDetails: true,
-          portfolioDetails
+          showPortfolioList: false,
+          showPortfolioDetail: true,
+          portfolioDetailsData
         });
       });
   };
@@ -100,8 +110,8 @@ class App extends React.Component {
       .then(res => res.json())
       .then(instrumentDetails => {
         this.setState({
-          resultList: false,
-          resultDetails: false,
+          showPortfolioList: false,
+          showPortfolioDetail: false,
           instrumentDetails: true,
           instrumentDetailsData: instrumentDetails
         });
@@ -110,14 +120,14 @@ class App extends React.Component {
 
   backPortfolioDetail = () => {
     this.setState({
-      resultList: true,
-      resultDetails: false
+      showPortfolioList: true,
+      showPortfolioDetail: false
     });
   };
 
   backPortfolioList = () => {
     this.setState({
-      resultList: true,
+      showPortfolioList: true,
       instrumentDetails: false
     });
   };
@@ -126,15 +136,15 @@ class App extends React.Component {
     return (
       <div className="container">
         <Header />
-        <LoginForm credentials={this.login} show={this.state.loginForm} />
+        <LoginForm credentials={this.login} show={this.state.showLoginForm} />
         <PortfolioList
-          portfolioList={this.state.portfolioList}
+          portfolioListData={this.state.portfolioListData}
           getPortfolioId={this.getPortfolioDetails}
-          show={this.state.resultList}
+          show={this.state.showPortfolioList}
         />
         <PortfolioDetail
-          show={this.state.resultDetails}
-          portfolioDetails={this.state.portfolioDetails}
+          show={this.state.showPortfolioDetail}
+          portfolioDetailsData={this.state.portfolioDetailsData}
           back={this.backPortfolioDetail}
           getInstrId={this.getInstrumentDetails}
         />

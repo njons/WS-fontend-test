@@ -13,11 +13,12 @@ class LoginForm extends React.Component {
   };
 
   render() {
+    if (this.props.show !== true) {
+      return <div />;
+    }
+
     return (
-      <div
-        className="container"
-        style={this.props.show ? {} : { display: "none" }}
-      >
+      <div className="container">
         <form
           onSubmit={ev =>
             this.props.credentials(this.state.email, this.state.password)

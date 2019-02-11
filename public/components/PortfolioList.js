@@ -4,8 +4,12 @@ import PortfolioDetail from "./PortfolioDetail";
 
 class PortfolioList extends React.Component {
   render() {
-    const results = this.props.portfolioList;
-    console.log(results);
+    if (this.props.show !== true) {
+      return <div />;
+    }
+
+    const results = this.props.portfolioListData;
+    console.log("these are the portfolio results:", results);
     let portfolio = results.map((portfolio, i) => (
       <PortfolioItem
         id={portfolio.id}
@@ -17,10 +21,7 @@ class PortfolioList extends React.Component {
     ));
 
     return (
-      <div
-        className="container"
-        style={this.props.show ? {} : { display: "none" }}
-      >
+      <div className="container">
         <div className="banner">
           <h1 className="page-title"> My Portfolio List</h1>
         </div>

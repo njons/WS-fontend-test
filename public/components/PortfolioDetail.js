@@ -3,14 +3,12 @@ import PortfolioDetailGrid from "./PortfolioDetailGrid";
 
 class PortfolioDetail extends React.Component {
   render() {
-    if (this.props.portfolioDetails.length === 0) {
+    if (this.props.show !== true) {
       return <div />;
     }
 
-    const portfolioDetails = this.props.portfolioDetails;
-    console.log("these are the portfolio details:", portfolioDetails);
-    const instrumentDetails = portfolioDetails.position;
-    console.log("these are the instrument details:", instrumentDetails);
+    const portfolioDetailsData = this.props.portfolioDetailsData;
+    const instrumentDetails = portfolioDetailsData.position;
 
     const instrument = instrumentDetails.map((instr, i) => {
       return (
@@ -24,12 +22,9 @@ class PortfolioDetail extends React.Component {
     });
 
     return (
-      <div
-        className="container"
-        style={this.props.show === true ? {} : { display: "none" }}
-      >
+      <div className="container">
         <div className="banner">
-          <h1 className="page-title"> Portfolio #{portfolioDetails.id}</h1>
+          <h1 className="page-title"> Portfolio #{portfolioDetailsData.id}</h1>
           <button className="back" onClick={this.props.back}>
             {" "}
             {"< back"}
@@ -37,14 +32,14 @@ class PortfolioDetail extends React.Component {
         </div>
         <h2 className="page-title">available cash</h2>
         <p className="portfolio-li">
-          {portfolioDetails.available_cash} {portfolioDetails.currency}
+          {portfolioDetailsData.available_cash} {portfolioDetailsData.currency}
         </p>
         <h2 className="page-title">Market value</h2>
         <p className="portfolio-li">
-          {portfolioDetails.market_value === null
+          {portfolioDetailsData.market_value === null
             ? 0
-            : portfolioDetails.market_value}{" "}
-          {portfolioDetails.currency}
+            : portfolioDetailsData.market_value}{" "}
+          {portfolioDetailsData.currency}
         </p>
         <div className="grid-container">
           <h2 className="page-title">Instruments</h2>

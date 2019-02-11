@@ -3,16 +3,14 @@ import { render } from "react-dom";
 
 class InstrumentDetail extends React.Component {
   render() {
-    if (this.props.instrumentDetails.length === 0) {
+    if (this.props.show !== true) {
       return <div />;
     }
+
     const instrumentDetail = this.props.instrumentDetails;
-    console.log("this is instrument details :", instrumentDetail);
+
     return (
-      <div
-        className="container"
-        style={this.props.show ? {} : { display: "none" }}
-      >
+      <div className="container">
         <div className="banner">
           <h1 className="page-title">
             {" "}
