@@ -43,11 +43,11 @@ class LoginForm extends React.Component {
               required
             />
           </label>
+          <p className="title error">{this.props.errorMessage}</p>
           <button className="submit" type="submit">
             {" "}
             Login{" "}
           </button>
-          <p className="title error">{this.props.errorMessage}</p>
         </form>
       </div>
     );
