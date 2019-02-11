@@ -159,3 +159,12 @@ thead {
   line-height: 33px;
   cursor: pointer;
 }
+
+.error {
+  color: red;
+  margin-bottom: 33px;
+  margin: auto;
+}
+.error:empty {
+  display: none;
+}

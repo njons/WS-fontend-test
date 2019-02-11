@@ -1,4 +1,5 @@
 import React from "react";
+import ErrorMessage from "./ErrorMessage";
 
 class LoginForm extends React.Component {
   state = {
@@ -46,6 +47,7 @@ class LoginForm extends React.Component {
             {" "}
             Login{" "}
           </button>
+          <p className="title error">{this.props.errorMessage}</p>
         </form>
       </div>
     );

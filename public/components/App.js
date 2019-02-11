@@ -14,7 +14,8 @@ class App extends React.Component {
     token: "",
     portfolioListData: [],
     portfolioDetailsData: [],
-    instrumentDetailsData: []
+    instrumentDetailsData: [],
+    errorMessage: ""
   };
 
   componentDidMount() {
@@ -42,7 +43,7 @@ class App extends React.Component {
         password
       })
     })
-      // .then(checkStatus ==> separete function that looks at the status code of the res object to ensure its 200)
+      .then(res => this.checkStatus(res))
       .then(res => res.json())
       .then(token => {
         this.setState(
@@ -52,13 +53,40 @@ class App extends React.Component {
             showPortfolioList: true
           },
           () => {
-            //save in local storage here
             localStorage.setItem("token", JSON.stringify(token.token));
             this.getPortfolioData();
           }
         );
+      })
+      .catch(error => {
+        console.log("looks like somthing went wrong", error);
+        this.setState(
+          {
+            showLoginForm: false,
+            showPortfolioList: false,
+            showPortfolioDetail: false,
+            instrumentDetails: false
+          },
+          () => {
+            this.logout();
+          }
+        );
       });
-    // .catch(don't forget to catch errors)
+  };
+
+  checkStatus = response => {
+    console.log(response.status);
+    if (response.ok) {
+      return Promise.resolve(response);
+    } else if (response.status === 400) {
+      this.setState({
+        errorMessage: "Your details were not recognised. Try again!"
+      });
+    } else if (response.staus === 500) {
+      this.setState({
+        errorMessage: "Something went wrong on our end. Try again later."
+      });
+    }
   };
 
   getPortfolioData = () => {
@@ -154,7 +182,11 @@ class App extends React.Component {
     return (
       <div className="container">
         <Header />
-        <LoginForm credentials={this.login} show={this.state.showLoginForm} />
+        <LoginForm
+          errorMessage={this.state.errorMessage}
+          credentials={this.login}
+          show={this.state.showLoginForm}
+        />
         <PortfolioList
           portfolioListData={this.state.portfolioListData}
           getPortfolioId={this.getPortfolioDetails}
