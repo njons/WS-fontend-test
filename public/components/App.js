@@ -46,18 +46,17 @@ class App extends React.Component {
       .then(res => this.checkStatus(res))
       .then(res => res.json())
       .then(token => {
-        console.log(token);
-        // this.setState(
-        //   {
-        //     showLoginForm: false,
-        //     token: token.token,
-        //     showPortfolioList: true
-        //   },
-        //   () => {
-        //     localStorage.setItem("token", JSON.stringify(token.token));
-        //     this.getPortfolioData();
-        //   }
-        // );
+        this.setState(
+          {
+            showLoginForm: false,
+            token: token.token,
+            showPortfolioList: true
+          },
+          () => {
+            localStorage.setItem("token", JSON.stringify(token.token));
+            this.getPortfolioData();
+          }
+        );
       })
       .catch(error => {
         console.log("looks like somthing went wrong", error);

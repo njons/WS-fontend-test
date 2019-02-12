@@ -57,19 +57,6 @@ const apiLoginRoute = (req, response, url) => {
       }
     );
   });
-
-  // request(apiUrl, (error, response, body) => {
-  //   // console.log('Error: ', error);
-  //   const parsedData = JSON.parse(body);
-  //   // console.log("this is the parsed data:", parsedData);
-  //   // if (url.indexOf("guardian") !== -1) {
-  //   //   article = {
-  //   //     Guardian: {
-  //   //       article: parsedData.response.results[1].fields.bodyText
-  //   //     }
-  //   //   };
-  //   //   responseArr.push(article);
-  // });
 };
 
 module.exports = { reactRoutes, apiLoginRoute };
