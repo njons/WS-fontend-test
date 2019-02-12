@@ -35,7 +35,7 @@ class App extends React.Component {
 
   login = (email, password) => {
     event.preventDefault();
-    fetch("https://beta.stockzoom.com/api-token-auth/", {
+    fetch("/api-login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -49,17 +49,17 @@ class App extends React.Component {
         this.setState(
           {
             showLoginForm: false,
-            token: token.token,
+            token: token,
             showPortfolioList: true
           },
           () => {
-            localStorage.setItem("token", JSON.stringify(token.token));
+            localStorage.setItem("token", token);
             this.getPortfolioData();
           }
         );
       })
       .catch(error => {
-        console.log("looks like somthing went wrong", error);
+        console.log("looks like something went wrong", error);
         this.setState(
           {
             showLoginForm: false,
@@ -68,20 +68,33 @@ class App extends React.Component {
             instrumentDetails: false
           },
           () => {
-            this.logout();
+            localStorage.removeItem("token");
+            this.setState({
+              showLoginForm: true,
+              showPortfolioList: false,
+              showPortfolioDetail: false,
+              instrumentDetails: false
+            });
           }
         );
       });
   };
 
   checkStatus = response => {
+    console.log("status checked");
+    console.log(response.ok);
     console.log(response.status);
-    if (response.ok) {
+    if (response.status === 200) {
       return Promise.resolve(response);
-    } else if (response.status === 400) {
-      this.setState({
-        errorMessage: "Your details were not recognised. Try again!"
-      });
+    } else if (response.status === 400 || response.status === 401) {
+      this.setState(
+        {
+          errorMessage: "Your details were not recognised. Try again!"
+        },
+        () => {
+          console.log("checking error message after 401: ", this.state);
+        }
+      );
     } else if (response.staus === 500) {
       this.setState({
         errorMessage: "Something went wrong on our end. Try again later."
@@ -90,9 +103,12 @@ class App extends React.Component {
   };
 
   getPortfolioData = () => {
-    const credentials = JSON.parse(localStorage.getItem("token"));
-    console.log("I am getting data since local storage has a token");
-    fetch("https://beta.stockzoom.com/api/v1/me/portfolios/", {
+    const credentials = localStorage.getItem("token");
+    console.log(
+      "I am getting data since local storage has a token",
+      credentials
+    );
+    fetch("/api-portfolios", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -116,8 +132,8 @@ class App extends React.Component {
   };
 
   getPortfolioDetails = id => {
-    const credentials = JSON.parse(localStorage.getItem("token"));
-    fetch(`https://beta.stockzoom.com/api/v1/me/portfolios/${id}/`, {
+    const credentials = localStorage.getItem("token");
+    fetch(`/api-portfolio-details/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -135,8 +151,8 @@ class App extends React.Component {
   };
 
   getInstrumentDetails = id => {
-    const credentials = JSON.parse(localStorage.getItem("token"));
-    fetch(`https://beta.stockzoom.com/api/v1/instruments/${id}/`, {
+    const credentials = localStorage.getItem("token");
+    fetch(`/api-instrument-details/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -174,7 +190,8 @@ class App extends React.Component {
       showLoginForm: true,
       showPortfolioList: false,
       showPortfolioDetail: false,
-      instrumentDetails: false
+      instrumentDetails: false,
+      errorMessage: "you have logged out"
     });
   };
 
