@@ -20,7 +20,6 @@ class App extends React.Component {
 
   componentDidMount() {
     if (localStorage.getItem("token") !== null) {
-      console.log("this is in localstorage", localStorage.getItem("token"));
       this.setState(
         {
           showLoginForm: false,
@@ -59,7 +58,6 @@ class App extends React.Component {
         );
       })
       .catch(error => {
-        console.log("looks like something went wrong", error);
         this.setState(
           {
             showLoginForm: false,
@@ -81,20 +79,12 @@ class App extends React.Component {
   };
 
   checkStatus = response => {
-    console.log("status checked");
-    console.log(response.ok);
-    console.log(response.status);
     if (response.status === 200) {
       return Promise.resolve(response);
     } else if (response.status === 400 || response.status === 401) {
-      this.setState(
-        {
-          errorMessage: "Your details were not recognised. Try again!"
-        },
-        () => {
-          console.log("checking error message after 401: ", this.state);
-        }
-      );
+      this.setState({
+        errorMessage: "Your details were not recognised. Try again!"
+      });
     } else if (response.staus === 500) {
       this.setState({
         errorMessage: "Something went wrong on our end. Try again later."
@@ -104,10 +94,6 @@ class App extends React.Component {
 
   getPortfolioData = () => {
     const credentials = localStorage.getItem("token");
-    console.log(
-      "I am getting data since local storage has a token",
-      credentials
-    );
     fetch("/api-portfolios", {
       method: "GET",
       headers: {
@@ -117,17 +103,11 @@ class App extends React.Component {
     })
       .then(res => res.json())
       .then(portfolios => {
-        console.log("this is the data:", portfolios.results);
-        this.setState(
-          {
-            portfolioListData: portfolios.results,
-            showLoginForm: false,
-            showPortfolioList: true
-          },
-          () => {
-            console.log("this is the state after login:", this.state);
-          }
-        );
+        this.setState({
+          portfolioListData: portfolios.results,
+          showLoginForm: false,
+          showPortfolioList: true
+        });
       });
   };
 

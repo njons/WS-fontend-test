@@ -1,7 +1,6 @@
 const { reactRoutes, apiLoginRoute, apiRequestRoute } = require("./handler");
 const router = (req, res) => {
   const url = req.url;
-  console.log("Request:", url);
 
   if (url === "/api-login") {
     apiLoginRoute(req, res);
