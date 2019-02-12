@@ -173,7 +173,7 @@ thead {
   display: none;
 }
 
-@media (min-width: 400px) {
+@media (max-width: 400px) {
   .container {
     width: 85vw;
   }
