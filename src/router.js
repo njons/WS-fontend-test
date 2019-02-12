@@ -12,6 +12,11 @@ const router = (req, res) => {
     const portfolioId = url.split("/")[2];
     const apiUrl = `https://beta.stockzoom.com/api/v1/me/portfolios/${portfolioId}/`;
     apiRequestRoute(req, res, apiUrl);
+  } else if (url.includes("/api-instrument-details/")) {
+    const instumentId = url.split("/")[2];
+    const apiUrl = `https://beta.stockzoom.com/api/v1/instruments/${instumentId}/`;
+    const portfolioId = url.split("/")[2];
+    apiRequestRoute(req, res, apiUrl);
   } else {
     reactRoutes(req, res, url);
   }

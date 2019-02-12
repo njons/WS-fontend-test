@@ -138,8 +138,8 @@ class App extends React.Component {
   };
 
   getInstrumentDetails = id => {
-    const credentials = JSON.parse(localStorage.getItem("token"));
-    fetch(`https://beta.stockzoom.com/api/v1/instruments/${id}/`, {
+    const credentials = localStorage.getItem("token");
+    fetch(`/api-instrument-details/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
