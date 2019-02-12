@@ -12,7 +12,10 @@ body {
   font-size: 14px;
   letter-spacing: 1px;
   display: flex;
-  justify-content: center;
+}
+
+#root {
+  margin: 0 auto;
 }
 
 header {
@@ -22,7 +25,7 @@ header {
 .container {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 20px 0;
   width: 70vw;
 }
 
@@ -168,4 +171,17 @@ thead {
 }
 .error:empty {
   display: none;
+}
+
+@media (min-width: 400px) {
+  .container {
+    width: 85vw;
+  }
+  .text {
+    font-size: 22px;
+  }
+  table {
+    overflow-x: scroll;
+    display: block;
+  }
 }
