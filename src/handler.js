@@ -3,9 +3,9 @@ const path = require("path");
 const querystring = require("querystring");
 const request = require("request");
 
-const reactRoutes = (request, response, url) => {
+const reactRoutes = (req, res, url) => {
   // set index.html to home
-  const requestPath = request.url == "/" ? "/index.html" : request.url;
+  const requestPath = req.url == "/" ? "/index.html" : req.url;
 
   const fileExt = url.split(".")[1];
   const mimeType = {
@@ -23,17 +23,16 @@ const reactRoutes = (request, response, url) => {
 
   fs.readFile(path.join(__dirname, "../dist", requestPath), (error, file) => {
     if (error) {
-      response.writeHead(500, { "Content-Type": "text/html" });
-      response.end("<h1>Something went wrong 500</h1>");
+      res.writeHead(500, { "Content-Type": "text/html" });
+      res.end("<h1>Something went wrong 500</h1>");
     } else {
-      response.writeHead(200, `Content-Type: ${mimeType[fileExt]}`);
-      response.end(file);
+      res.writeHead(200, `Content-Type: ${mimeType[fileExt]}`);
+      res.end(file);
     }
   });
 };
 
-const apiLoginRoute = (req, response, url) => {
-  console.log("this is the url:", req.url);
+const apiLoginRoute = (req, res) => {
   const apiUrl = "https://beta.stockzoom.com/api-token-auth/";
 
   let data = "";
@@ -48,15 +47,46 @@ const apiLoginRoute = (req, response, url) => {
       { url: apiUrl, json: { email, password } },
       (err, httpResponse, body) => {
         if (err) {
-          response.writeHead(500, { "Content-Type": "text/html" });
-          response.end("<h1>Something went wrong 500</h1>");
+          res.writeHead(500, { "Content-Type": "text/html" });
+          res.end("<h1>Something went wrong 500</h1>");
         } else {
-          response.writeHead(200, { "Content-Type": "text/html" });
-          response.end(JSON.stringify(body));
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.end(JSON.stringify(body));
         }
       }
     );
   });
 };
 
-module.exports = { reactRoutes, apiLoginRoute };
+const apiPortfolioRoute = (req, res) => {
+  console.log("this is the url:", req.url);
+  const apiUrl = "https://beta.stockzoom.com/api/v1/me/portfolios/";
+
+  let data = "";
+  req.on("data", chunk => {
+    data += chunk;
+  });
+  req.on("end", () => {
+    const token = req.headers.authorization.split(" ")[1];
+    request.get(
+      {
+        url: apiUrl,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      },
+      (err, httpResponse, body) => {
+        if (err) {
+          res.writeHead(500, { "Content-Type": "text/html" });
+          res.end("<h1>Something went wrong 500</h1>");
+        } else {
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.end(body);
+        }
+      }
+    );
+  });
+};
+
+module.exports = { reactRoutes, apiLoginRoute, apiPortfolioRoute };

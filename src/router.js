@@ -1,15 +1,15 @@
-const { reactRoutes, apiLoginRoute } = require("./handler");
-const router = (req, response) => {
+const { reactRoutes, apiLoginRoute, apiPortfolioRoute } = require("./handler");
+const router = (req, res) => {
   const url = req.url;
   console.log("Request:", url);
 
   if (url === "/api-login") {
     console.log("youre in API-login");
-    apiLoginRoute(req, response);
+    apiLoginRoute(req, res);
   } else if (url === "/api-portfolios") {
-    // apiPortfolioRoute(request, response);
+    apiPortfolioRoute(req, res);
   } else {
-    reactRoutes(req, response, url);
+    reactRoutes(req, res, url);
   }
 };
 

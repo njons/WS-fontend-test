@@ -92,7 +92,7 @@ class App extends React.Component {
   getPortfolioData = () => {
     const credentials = JSON.parse(localStorage.getItem("token"));
     console.log("I am getting data since local storage has a token");
-    fetch("https://beta.stockzoom.com/api/v1/me/portfolios/", {
+    fetch("/api-portfolios", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
