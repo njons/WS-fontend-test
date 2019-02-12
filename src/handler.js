@@ -53,12 +53,6 @@ const apiLoginRoute = (req, res) => {
         } else {
           const apiToken = body.token;
           const encryptToken = jwt.sign({ token: apiToken }, key);
-          console.log("this is the token from the api:", apiToken);
-          console.log("this is the encrypted token:", encryptToken);
-          console.log(
-            "the apiToken and encryptedToken are the same:",
-            encryptToken === body.token
-          );
           res.writeHead(200, { "Content-Type": "text/html" });
           res.end(JSON.stringify(encryptToken));
         }
@@ -67,9 +61,7 @@ const apiLoginRoute = (req, res) => {
   });
 };
 
-const apiPortfolioRoute = (req, res) => {
-  const apiUrl = "https://beta.stockzoom.com/api/v1/me/portfolios/";
-
+const apiRequestRoute = (req, res, apiUrl) => {
   let data = "";
   req.on("data", chunk => {
     data += chunk;
@@ -99,4 +91,8 @@ const apiPortfolioRoute = (req, res) => {
   });
 };
 
-module.exports = { reactRoutes, apiLoginRoute, apiPortfolioRoute };
+module.exports = {
+  reactRoutes,
+  apiLoginRoute,
+  apiRequestRoute
+};

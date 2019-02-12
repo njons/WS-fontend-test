@@ -119,8 +119,8 @@ class App extends React.Component {
   };
 
   getPortfolioDetails = id => {
-    const credentials = JSON.parse(localStorage.getItem("token"));
-    fetch(`https://beta.stockzoom.com/api/v1/me/portfolios/${id}/`, {
+    const credentials = localStorage.getItem("token");
+    fetch(`/api-portfolio-details/${id}/`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

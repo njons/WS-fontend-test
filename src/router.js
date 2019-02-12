@@ -1,4 +1,4 @@
-const { reactRoutes, apiLoginRoute, apiPortfolioRoute } = require("./handler");
+const { reactRoutes, apiLoginRoute, apiRequestRoute } = require("./handler");
 const router = (req, res) => {
   const url = req.url;
   console.log("Request:", url);
@@ -6,8 +6,12 @@ const router = (req, res) => {
   if (url === "/api-login") {
     apiLoginRoute(req, res);
   } else if (url === "/api-portfolios") {
-    console.log("youre in API-portfolio");
-    apiPortfolioRoute(req, res);
+    const apiUrl = "https://beta.stockzoom.com/api/v1/me/portfolios/";
+    apiRequestRoute(req, res, apiUrl);
+  } else if (url.indexOf("/api-portfolio-details/") === 0) {
+    const portfolioId = url.split("/")[2];
+    const apiUrl = `https://beta.stockzoom.com/api/v1/me/portfolios/${portfolioId}/`;
+    apiRequestRoute(req, res, apiUrl);
   } else {
     reactRoutes(req, res, url);
   }
