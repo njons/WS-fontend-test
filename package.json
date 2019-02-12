@@ -37,6 +37,7 @@
   "dependencies": {
     "jsonwebtoken": "^8.4.0",
     "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "react-dom": "^16.8.1",
+    "request": "^2.88.0"
   }
 }
