@@ -75,10 +75,11 @@ class App extends React.Component {
   };
 
   checkStatus = response => {
+    console.log("status checked");
     console.log(response.status);
     if (response.ok) {
       return Promise.resolve(response);
-    } else if (response.status === 400) {
+    } else if (response.status === 400 || response.status === 401) {
       this.setState({
         errorMessage: "Your details were not recognised. Try again!"
       });
@@ -177,7 +178,8 @@ class App extends React.Component {
       showLoginForm: true,
       showPortfolioList: false,
       showPortfolioDetail: false,
-      instrumentDetails: false
+      instrumentDetails: false,
+      errorMessage: ""
     });
   };
 

@@ -51,10 +51,15 @@ const apiLoginRoute = (req, res) => {
           res.writeHead(500, { "Content-Type": "text/html" });
           res.end("<h1>Something went wrong 500</h1>");
         } else {
-          const apiToken = body.token;
-          const encryptToken = jwt.sign({ token: apiToken }, key);
-          res.writeHead(200, { "Content-Type": "text/html" });
-          res.end(JSON.stringify(encryptToken));
+          if (body.non_field_errors) {
+            res.writeHead(401, { "Content-Type": "text/html" });
+            res.end(body.non_field_errors[0]);
+          } else {
+            const apiToken = body.token;
+            const encryptToken = jwt.sign({ token: apiToken }, key);
+            res.writeHead(200, { "Content-Type": "text/html" });
+            res.end(JSON.stringify(encryptToken));
+          }
         }
       }
     );
