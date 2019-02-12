@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const querystring = require("querystring");
+const request = require("request");
 
 const reactRoutes = (request, response, url) => {
   // set index.html to home
@@ -31,4 +32,44 @@ const reactRoutes = (request, response, url) => {
   });
 };
 
-module.exports = { reactRoutes };
+const apiLoginRoute = (req, response, url) => {
+  console.log("this is the url:", req.url);
+  const apiUrl = "https://beta.stockzoom.com/api-token-auth/";
+
+  let data = "";
+  req.on("data", chunk => {
+    data += chunk;
+  });
+  req.on("end", () => {
+    const parsedData = JSON.parse(data);
+    const email = parsedData.email;
+    const password = parsedData.password;
+    request.post(
+      { url: apiUrl, json: { email, password } },
+      (err, httpResponse, body) => {
+        if (err) {
+          response.writeHead(500, { "Content-Type": "text/html" });
+          response.end("<h1>Something went wrong 500</h1>");
+        } else {
+          response.writeHead(200, { "Content-Type": "text/html" });
+          response.end(JSON.stringify(body));
+        }
+      }
+    );
+  });
+
+  // request(apiUrl, (error, response, body) => {
+  //   // console.log('Error: ', error);
+  //   const parsedData = JSON.parse(body);
+  //   // console.log("this is the parsed data:", parsedData);
+  //   // if (url.indexOf("guardian") !== -1) {
+  //   //   article = {
+  //   //     Guardian: {
+  //   //       article: parsedData.response.results[1].fields.bodyText
+  //   //     }
+  //   //   };
+  //   //   responseArr.push(article);
+  // });
+};
+
+module.exports = { reactRoutes, apiLoginRoute };

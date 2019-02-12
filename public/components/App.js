@@ -35,7 +35,7 @@ class App extends React.Component {
 
   login = (email, password) => {
     event.preventDefault();
-    fetch("https://beta.stockzoom.com/api-token-auth/", {
+    fetch("/api-login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -46,17 +46,18 @@ class App extends React.Component {
       .then(res => this.checkStatus(res))
       .then(res => res.json())
       .then(token => {
-        this.setState(
-          {
-            showLoginForm: false,
-            token: token.token,
-            showPortfolioList: true
-          },
-          () => {
-            localStorage.setItem("token", JSON.stringify(token.token));
-            this.getPortfolioData();
-          }
-        );
+        console.log(token);
+        // this.setState(
+        //   {
+        //     showLoginForm: false,
+        //     token: token.token,
+        //     showPortfolioList: true
+        //   },
+        //   () => {
+        //     localStorage.setItem("token", JSON.stringify(token.token));
+        //     this.getPortfolioData();
+        //   }
+        // );
       })
       .catch(error => {
         console.log("looks like somthing went wrong", error);
