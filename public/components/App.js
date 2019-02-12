@@ -49,17 +49,17 @@ class App extends React.Component {
         this.setState(
           {
             showLoginForm: false,
-            token: token.token,
+            token: token,
             showPortfolioList: true
           },
           () => {
-            localStorage.setItem("token", JSON.stringify(token.token));
+            localStorage.setItem("token", token);
             this.getPortfolioData();
           }
         );
       })
       .catch(error => {
-        console.log("looks like somthing went wrong", error);
+        console.log("looks like something went wrong", error);
         this.setState(
           {
             showLoginForm: false,
@@ -90,8 +90,11 @@ class App extends React.Component {
   };
 
   getPortfolioData = () => {
-    const credentials = JSON.parse(localStorage.getItem("token"));
-    console.log("I am getting data since local storage has a token");
+    const credentials = localStorage.getItem("token");
+    console.log(
+      "I am getting data since local storage has a token",
+      credentials
+    );
     fetch("/api-portfolios", {
       method: "GET",
       headers: {

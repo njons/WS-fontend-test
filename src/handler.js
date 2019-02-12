@@ -2,7 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const querystring = require("querystring");
 const request = require("request");
-
+const jwt = require("jsonwebtoken");
+const key = "apple";
 const reactRoutes = (req, res, url) => {
   // set index.html to home
   const requestPath = req.url == "/" ? "/index.html" : req.url;
@@ -50,8 +51,16 @@ const apiLoginRoute = (req, res) => {
           res.writeHead(500, { "Content-Type": "text/html" });
           res.end("<h1>Something went wrong 500</h1>");
         } else {
+          const apiToken = body.token;
+          const encryptToken = jwt.sign({ token: apiToken }, key);
+          console.log("this is the token from the api:", apiToken);
+          console.log("this is the encrypted token:", encryptToken);
+          console.log(
+            "the apiToken and encryptedToken are the same:",
+            encryptToken === body.token
+          );
           res.writeHead(200, { "Content-Type": "text/html" });
-          res.end(JSON.stringify(body));
+          res.end(JSON.stringify(encryptToken));
         }
       }
     );
@@ -59,7 +68,6 @@ const apiLoginRoute = (req, res) => {
 };
 
 const apiPortfolioRoute = (req, res) => {
-  console.log("this is the url:", req.url);
   const apiUrl = "https://beta.stockzoom.com/api/v1/me/portfolios/";
 
   let data = "";
@@ -68,12 +76,14 @@ const apiPortfolioRoute = (req, res) => {
   });
   req.on("end", () => {
     const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, key);
+    const verifiedToken = decodedToken.token;
     request.get(
       {
         url: apiUrl,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${verifiedToken}`
         }
       },
       (err, httpResponse, body) => {
